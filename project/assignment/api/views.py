@@ -19,7 +19,7 @@ class UploadData(View):
             file_object = FileData.objects.get(file= entry['file'])
             files['files'].append(file_object.file.name)
         
-        print(files,post_json)
+        #print(files,post_json)
         url = 'http://dev.letsmd.com/partners/mobile'
         r = requests.post(url, files=files, data=post_json)
 
