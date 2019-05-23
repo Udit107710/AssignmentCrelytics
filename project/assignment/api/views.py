@@ -21,6 +21,7 @@ class UploadData(View):
         
         #print(files,post_json)
         url = 'http://dev.letsmd.com/partners/mobile'
-        r = requests.post(url, files=files, data=post_json)
-
+        user = 'crelytics'
+        password = '9kNQq3TNSn'
+        r = requests.post(url, files=files, data=post_json, auth=(user,password))
         return HttpResponse(r)
