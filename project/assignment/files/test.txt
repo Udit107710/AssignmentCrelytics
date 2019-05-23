@@ -1,0 +1,1 @@
+Create Emp table. Insert data into table through collections. Salary greater than 10,000

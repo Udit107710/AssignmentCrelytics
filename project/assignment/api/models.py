@@ -1,10 +1,8 @@
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Data(models.Model):
     GENDER_CHOICES = [ ( 'male','male'), ('female', 'female'), ('other', 'other')]
     RESIDENCE_TYPE_CHOICES = [ ('rented', 'rented') , ( 'alloted','alloted') ,('owned','owned') ,( 'parental','parental')]
-    #DURATION_CHOICES = [ ('1','january'),('2','february') ,('3','march') ,('4', 'april') ,('5','may') ,('6','june') ,('7','july') ,('8','august') ,( '9', 'september') ,( '10', 'october') ,('11', 'november') , ( '12','december') ] 
     EMPLOYMENT_TYPE = [ ('Salaried','Salaried'), ('SEP', 'Self Employed Professional'), ('SENP', 'self employed non professional')]
 
 
@@ -18,7 +16,7 @@ class Data(models.Model):
     gender = models.CharField(choices=GENDER_CHOICES, max_length=10)
     residence_type = models.CharField(choices=RESIDENCE_TYPE_CHOICES,max_length=10)
     #living_duration_start = models.IntegerField(choices=DURATION_CHOICS)
-    living_duration = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(12)])
+    living_duration = models.IntegerField()
     #living_duration_end = models.IntegerField(choices=DURATION_CHOICES)
     address = models.TextField(max_length=400)
     street_landmark = models.CharField(max_length=200)
@@ -26,7 +24,7 @@ class Data(models.Model):
     employment_type = models.CharField(choices=EMPLOYMENT_TYPE, max_length=10)
     company_name = models.CharField(max_length=100)
     #current_job_duration_start = models.IntegerField(choices= DURATION_CHOICES)
-    current_job_duration = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(12)])
+    current_job_duration = models.IntegerField()
     #current_job_duration_end = models.IntegerField(choices= DURATION_CHOICES)
     job_stability = models.IntegerField()
     loan_amount = models.DecimalField(max_digits=15, decimal_places=4)
@@ -68,7 +66,7 @@ class FileData(models.Model):
 
     file_id = models.AutoField(primary_key=True)
     data = models.ForeignKey(Data, on_delete=models.SET_NULL, null=True)
-    file = models.FileField()
+    file = models.FileField(upload_to="files/")
     patient_document = models.CharField(choices=PATIENT_DOCUMENT_CHOICES,max_length=30)
 
     def __str__(self):
